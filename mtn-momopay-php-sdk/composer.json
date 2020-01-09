@@ -1,0 +1,19 @@
+{
+  "name": "pearlbrains/mtn-momopay",
+  "description": "A simple SDK for integrating to MTN's MomoPay payment gateway",
+  "type": "library",
+  "require": {
+    "monolog/monolog": "1.*",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "require-dev": {
+
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Allan Dereal",
+      "email": "ahullan@gmail.com"
+    }
+  ]
+}
