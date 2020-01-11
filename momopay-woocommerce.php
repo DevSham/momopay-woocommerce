@@ -11,6 +11,10 @@
 
 define( 'MOMOPAY_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 require_once( MOMOPAY_PLUGIN_DIR_PATH . 'mtn-momopay-php-sdk/lib/Momopay.php' );
+require_once( MOMOPAY_PLUGIN_DIR_PATH . 'mtn-momopay-php-sdk/lib/EventHandlerInterface.php' );
+require_once( MOMOPAY_PLUGIN_DIR_PATH . 'mtn-momopay-php-sdk/lib/MomopayEventHandler.php' );
+
+use MTN\MomopayEventHandler;
 use MTN\Momopay;
 
 /**
@@ -315,17 +319,15 @@ function momopay_init_gateway_class() {
          */
         public function process_payment( $order_id )
         {
-            global $woocommerce;
-
-
             // we need it to get any order detailes
             $order = wc_get_order( $order_id );
             $currency = isset($_POST['momopay_currency']) ? $_POST['momopay_currency'] : $order->get_order_currency();
             $phone = isset($_POST['momopay_phone']) ? $_POST['momopay_phone'] : $order->get_billing_phone();
             $external_id = 'WOO_'.$order->id.'_'.time();
             $error = null;
+            $event_handler = new MomopayEventHandler($order);
 
-            $request = new Momopay($this->primary_key, $this->api_user, $this->api_key, $this->base_url, $this->env);
+            $request = new Momopay($this->primary_key, $this->api_user, $this->api_key, $this->base_url, $this->env, $event_handler);
             $access_token = $request->getAccessToken();
 
             if ($access_token){
@@ -351,7 +353,7 @@ function momopay_init_gateway_class() {
                             //
                     }
                 } else {
-                    $error = 'Can\'t Process Payment.';
+                    $error = 'Can\'t Process Payment. Please check Payment form details.';
                 }
             } else {
                 $error = 'Payment Failed!';
@@ -361,17 +363,6 @@ function momopay_init_gateway_class() {
                 wc_add_notice(  $error, 'error' );
                 return;
             }
-
-
-            // we received the payment
-            $order->payment_complete();
-            $order->reduce_order_stock();
-
-            // some notes to customer (replace true with false to make it private)
-            $order->add_order_note( 'Hey, your order is paid! Thank you!', true );
-
-            // Empty cart
-            $woocommerce->cart->empty_cart();
 
             // Redirect to the thank you page
             return array(
