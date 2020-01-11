@@ -302,8 +302,6 @@ function momopay_init_gateway_class() {
             $phone = substr($phone, 0, 1) == '+' ? substr($phone, 4) : $phone;
             $external_id = 'WOO_'.$order->id.'_'.time();
             $note =  'Payment for order '.$order->id.' on '.get_permalink( woocommerce_get_page_id( 'shop' ) );
-            //wc_add_notice(  $note, 'error' );
-            //return;
             $error = null;
             $event_handler = new MomopayEventHandler($order);
 
