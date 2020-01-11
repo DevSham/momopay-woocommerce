@@ -244,7 +244,7 @@ function momopay_init_gateway_class() {
             </div>
             <div class="form-row form-row-last">
                 <label>Phone Number <span class="required">*</span></label>
-                <input id="momopay_phone" name="momopay_phone" type="tel" autocomplete="tel" placeholder=" eg. 0771234567">
+                <input id="momopay_phone" name="momopay_phone" type="tel" autocomplete="tel" value="9" placeholder=" eg. 0771234567">
             </div>
             <div class="form-row form-row-wide"><label>Payer Message (Optional) </label>
                 <input name="momopay_payer_message"  type="text" autocomplete="off">
@@ -323,6 +323,7 @@ function momopay_init_gateway_class() {
             $order = wc_get_order( $order_id );
             $currency = isset($_POST['momopay_currency']) ? $_POST['momopay_currency'] : $order->get_order_currency();
             $phone = isset($_POST['momopay_phone']) ? $_POST['momopay_phone'] : $order->get_billing_phone();
+            $phone = substr($phone, 0, 1) == '+' ? substr($phone, 4) : $phone;
             $external_id = 'WOO_'.$order->id.'_'.time();
             $error = null;
             $event_handler = new MomopayEventHandler($order);
