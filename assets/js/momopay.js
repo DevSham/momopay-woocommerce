@@ -29,9 +29,10 @@ window.onload = function () {
     }else {
         currencyField.value = 'EUR';
     }
-
-    //update fields on form change
-    formPhoneField.addEventListener('change', function (e) {
-        phoneField.value = sanitizedPhone(this.value);
-    });
 };
+
+//update fields on form change
+
+jQuery('#billing_phone').on('change', function (e) {
+    phoneField.value = sanitizedPhone(this.value);
+});

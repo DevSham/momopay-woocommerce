@@ -244,7 +244,7 @@ function momopay_init_gateway_class() {
             </div>
             <div class="form-row form-row-last">
                 <label>Phone Number <span class="required">*</span></label>
-                <input id="momopay_phone" name="momopay_phone" type="tel" autocomplete="tel" value="9" placeholder=" eg. 0771234567">
+                <input id="momopay_phone" name="momopay_phone" type="tel" autocomplete="off" placeholder=" eg. 0771234567">
             </div>
             <div class="form-row form-row-wide"><label>Payer Message (Optional) </label>
                 <input name="momopay_payer_message"  type="text" autocomplete="off">
