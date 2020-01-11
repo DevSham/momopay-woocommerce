@@ -186,11 +186,6 @@ function momopay_init_gateway_class() {
                     'description' => __( 'Enter your Test API Key from https://momodeveloper.mtn.com', 'momopay-payments' ),
                     'default'     => ''
                 ),
-//                'webhook' => array(
-//                    'title'       => __( 'Webhook Instruction', 'momopay-payments' ),
-//                    'type'        => 'hidden',
-//                    'description' => __( 'This webhook url will be used while sending your payment requests <strong style="color: red"><pre><code>'.WC()->api_request_url('Momo_WC_Payment_Webhook').'</code></pre></strong> (<a href="https://momopay.pearlbrains.net/dashboard/settings/webhooks" target="_blank">MomoPay Account</a>)', 'momopay-payments' ),
-//                ),
                 'currency' => array(
                     'title'       => __( 'Charge Country', 'momopay-payments' ),
                     'type'        => 'select',
@@ -202,14 +197,7 @@ function momopay_init_gateway_class() {
                         'XOF' => esc_html_x( 'COTE D\'IVOIRE', 'currency', 'momopay-payments' ),
                     ),
                     'default'     => 'UGX'
-                ),
-//             'modal_logo' => array(
-//               'title'       => __( 'Modal Custom Logo', 'momopay-payments' ),
-//               'type'        => 'text',
-//               'description' => __( 'Optional - URL to your store\'s logo. Preferably a square image', 'momopay-payments' ),
-//               'default'     => ''
-//             ),
-
+                )
             );
         }
 
@@ -238,11 +226,7 @@ function momopay_init_gateway_class() {
 
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            echo '<div class="form-row form-row-first">
-                <label>Currency <span class="required">*</span></label>
-                <input id="momopay_currency" name="momopay_currency" type="text" autocomplete="off">
-            </div>
-            <div class="form-row form-row-last">
+            echo '<div class="form-row form-row-wide">
                 <label>Phone Number <span class="required">*</span></label>
                 <input id="momopay_phone" name="momopay_phone" type="tel" autocomplete="off" placeholder=" eg. 0771234567">
             </div>
@@ -298,8 +282,6 @@ function momopay_init_gateway_class() {
                 ),
                 'goa-live' => $this->go_live
             ) );
-
-            //wp_enqueue_script( 'momopay_js' );
         }
 
         /**
@@ -321,7 +303,7 @@ function momopay_init_gateway_class() {
         {
             // we need it to get any order detailes
             $order = wc_get_order( $order_id );
-            $currency = isset($_POST['momopay_currency']) ? $_POST['momopay_currency'] : $order->get_order_currency();
+            $currency = $this->go_live ? strtoupper($order->get_order_currency()) : 'EUR';
             $phone = isset($_POST['momopay_phone']) ? $_POST['momopay_phone'] : $order->get_billing_phone();
             $phone = substr($phone, 0, 1) == '+' ? substr($phone, 4) : $phone;
             $external_id = 'WOO_'.$order->id.'_'.time();
