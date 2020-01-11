@@ -7,7 +7,7 @@
  */
 namespace MTN;
 
-require_once( substr(plugin_dir_path(__FILE__), 0, -4) . 'vendor/autoload.php' );
+require_once( MOMOPAY_PLUGIN_DIR_PATH . 'mtn-momopay-php-sdk/vendor/autoload.php' );
 
 use GuzzleHttp\Client;
 

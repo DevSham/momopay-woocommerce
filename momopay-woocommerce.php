@@ -9,7 +9,8 @@
  * License: GNU GPLv3
  */
 
-require_once( plugin_dir_path(__FILE__) . 'mtn-momopay-php-sdk/lib/Momopay.php' );
+define( 'MOMOPAY_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
+require_once( MOMOPAY_PLUGIN_DIR_PATH . 'mtn-momopay-php-sdk/lib/Momopay.php' );
 use MTN\Momopay;
 
 /**
