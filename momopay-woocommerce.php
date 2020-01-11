@@ -227,7 +227,7 @@ function momopay_init_gateway_class() {
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
             echo '<div class="form-row form-row-wide">
-                <label>Phone Number <span class="required">*</span></label>
+                <label>Phone Number to Charge <span class="required">*</span></label>
                 <input id="momopay_phone" name="momopay_phone" type="tel" autocomplete="off" placeholder=" eg. 0771234567">
             </div>
             <div class="clear"></div>';
@@ -295,13 +295,15 @@ function momopay_init_gateway_class() {
          */
         public function process_payment( $order_id )
         {
-            // we need it to get any order detailes
+            // we need it to get any order details
             $order = wc_get_order( $order_id );
             $currency = $this->go_live ? strtoupper($order->get_order_currency()) : 'EUR';
             $phone = isset($_POST['momopay_phone']) ? $_POST['momopay_phone'] : $order->get_billing_phone();
             $phone = substr($phone, 0, 1) == '+' ? substr($phone, 4) : $phone;
             $external_id = 'WOO_'.$order->id.'_'.time();
-            $note =  'Payment for order #'.$order->id.' on '.get_permalink( woocommerce_get_page_id( 'shop' ) );
+            $note =  'Payment for order '.$order->id.' on '.get_permalink( woocommerce_get_page_id( 'shop' ) );
+            //wc_add_notice(  $note, 'error' );
+            //return;
             $error = null;
             $event_handler = new MomopayEventHandler($order);
 
