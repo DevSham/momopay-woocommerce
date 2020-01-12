@@ -1,6 +1,4 @@
-var formPhoneField;
-var momoPhoneField;
-var sanitizedPhone = function (phone) {
+let sanitizedPhone = function (phone) {
     phone = phone.trim();
     if (phone.charAt(0) === '+'){
         phone = phone.substring(4, phone.length);
@@ -9,17 +7,17 @@ var sanitizedPhone = function (phone) {
     return phone;
 };
 
-window.onload = function () {
-    momopay_go_live = momopay_args.go_live;
+let syncInputValues = function(from, to){
+    to.value = sanitizedPhone(from.value);
+};
 
-    formPhoneField = document.getElementById('billing_phone');
-    momoPhoneField = document.getElementById('momopay_phone');
+let billPhone;
+let momoPhone;
 
-    //initialize fields
-    momoPhoneField.value = formPhoneField.value;
+//initialize payment phone
+window.onload = function(){
+    billPhone = document.getElementById('billing_phone');
+    momoPhone = document.getElementById('momopay_phone');
 
-    //update fields on form change
-    formPhoneField.addEventListener('change', function (e) {
-        momoPhoneField.value = sanitizedPhone(this.value);
-    });
+    syncInputValues(billPhone, momoPhone);
 };

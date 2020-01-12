@@ -72,7 +72,7 @@ function momopay_init_gateway_class() {
         public function __construct()
         {
             $this->id = 'momopay'; // payment gateway plugin ID
-            $this->icon = plugins_url('assets/img/mtnmomo.svg', __FILE__);
+            $this->icon = plugins_url('assets/img/momopay.png', __FILE__);
             $this->has_fields = true; // in case you need a custom credit card form
             $this->method_title = __('MTN MomoPay', 'momopay-payments');
             $this->method_description = __('MomoPay allows you to accept payment from MTN mobile subscribers in multiple currencies.', 'mmomopay-payments'); // will be displayed on the options page
@@ -274,7 +274,7 @@ function momopay_init_gateway_class() {
                     'CA' => 'XAF', //cameroon
                     'ZM' => 'ZMK' //zambia
                 ),
-                'goa-live' => $this->go_live
+                'go_live' => $this->go_live
             ) );
         }
 
