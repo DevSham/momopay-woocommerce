@@ -19,5 +19,7 @@ window.onload = function(){
     billPhone = document.getElementById('billing_phone');
     momoPhone = document.getElementById('momopay_phone');
 
-    syncInputValues(billPhone, momoPhone);
+    if (billPhone !== null && momoPhone !== null){
+        syncInputValues(billPhone, momoPhone);
+    }
 };
