@@ -48,7 +48,7 @@ add_action( 'plugins_loaded', 'momopay_init_gateway_class' );
 function momopay_plugin_action_links( $links ) {
 
     $momopay_settings_url = esc_url( get_admin_url( null, 'admin.php?page=wc-settings&tab=checkout&section=momopay' ) );
-    array_unshift( $links, "<a title='MomoPay Settings Page' href='$momopay_settings_url'>Settings</a>" );
+    array_unshift( $links, "<a title='MTN MomoPay Settings Page' href='$momopay_settings_url'>Settings</a>" );
 
     return $links;
 
@@ -124,9 +124,9 @@ function momopay_init_gateway_class() {
 
                 'enabled' => array(
                     'title'       => __( 'Enable/Disable', 'momopay-payments' ),
-                    'label'       => __( 'Enable MomoPay Payment Gateway', 'momopay-payments' ),
+                    'label'       => __( 'Enable MTN MomoPay Payment Gateway', 'momopay-payments' ),
                     'type'        => 'checkbox',
-                    'description' => __( 'Enable MomoPay Payment Gateway as a payment option on the checkout page', 'momopay-payments' ),
+                    'description' => __( 'Enable MTN MomoPay Payment Gateway as a payment option on the checkout page', 'momopay-payments' ),
                     'default'     => 'no',
                     'desc_tip'    => true
                 ),
@@ -134,7 +134,7 @@ function momopay_init_gateway_class() {
                     'title'       => __( 'Payment method title', 'momopay-payments' ),
                     'type'        => 'text',
                     'description' => __( 'Optional', 'momopay-payments' ),
-                    'default'     => 'MomoPay'
+                    'default'     => 'MTN MomoPay'
                 ),
                 'description' => array(
                     'title'       => __( 'Payment method description', 'momopay-payments' ),
@@ -151,37 +151,37 @@ function momopay_init_gateway_class() {
                     'desc_tip'    => true
                 ),
                 'primary_key' => array(
-                    'title'       => __( 'MomoPay Primary Key', 'momopay-payments' ),
+                    'title'       => __( 'MTN MomoPay Primary Key', 'momopay-payments' ),
                     'type'        => 'text',
                     'description' => __( 'Required! Enter your primary key from https://momodeveloper.mtn.com', 'momopay-payments' ),
                     'default'     => ''
                 ),
                 'secondary_key' => array(
-                    'title'       => __( 'MomoPay Secondary Key', 'momopay-payments' ),
+                    'title'       => __( 'MTN MomoPay Secondary Key', 'momopay-payments' ),
                     'type'        => 'text',
                     'description' => __( 'Optional! Enter your primary key from https://momodeveloper.mtn.com', 'momopay-payments' ),
                     'default'     => ''
                 ),
                 'live_api_user' => array(
-                    'title'       => __( 'MomoPay Live API User', 'momopay-payments' ),
+                    'title'       => __( 'MTN MomoPay Live API User', 'momopay-payments' ),
                     'type'        => 'text',
                     'description' => __( 'Required! Enter your Live API User from https://momodeveloper.mtn.com', 'momopay-payments' ),
                     'default'     => ''
                 ),
                 'live api_key' => array(
-                    'title'       => __( 'MomoPay Live API Key', 'momopay-payments' ),
+                    'title'       => __( 'MTN MomoPay Live API Key', 'momopay-payments' ),
                     'type'        => 'text',
                     'description' => __( 'Required! Enter your Live API Key from https://momodeveloper.mtn.com', 'momopay-payments' ),
                     'default'     => ''
                 ),
                 'test_api_user' => array(
-                    'title'       => __( 'MomoPay Test API User', 'momopay-payments' ),
+                    'title'       => __( 'MTN MomoPay Test API User', 'momopay-payments' ),
                     'type'        => 'text',
                     'description' => __( 'Enter your Test API User from https://momodeveloper.mtn.com', 'momopay-payments' ),
                     'default'     => ''
                 ),
                 'test_api_key' => array(
-                    'title'       => __( 'MomoPay Test API Key', 'momopay-payments' ),
+                    'title'       => __( 'MTN MomoPay Test API Key', 'momopay-payments' ),
                     'type'        => 'text',
                     'description' => __( 'Enter your Test API Key from https://momodeveloper.mtn.com', 'momopay-payments' ),
                     'default'     => ''
